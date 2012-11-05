@@ -1,0 +1,38 @@
+#!/bin/bash
+
+##################################
+# This script installs symlinks to dotfiles stored in git-repository.
+# Existing files are moved to a backup directory.
+##################################
+
+# Source directory for dotfiles
+dir="~/dotfiles"
+# Where to store existing conflicting dotfiles
+olddir="~/dotfiles_old"
+# List of files/folders to symlink in home directory
+files="bashrc vimrc vim irssi"
+
+
+echo "Creating $olddir for backup of any existing dotfiles in ~"
+mkdir -p $olddir
+
+echo "Entering $dir"
+cd $dir
+
+# Backup files
+echo "Backup old configuration files"
+for file in $files; do
+    if [ -e "$file" ]
+    then
+        echo "  ~/.$file => $olddir/$file"
+        mv ~/.$file $olddir
+    fi
+done
+
+# Create symlinks
+echo "Creating symlinks"
+for file in $files; do
+    echo "  ~/.$file"
+    ln -s $dir/$file ~/.$file
+done
+
