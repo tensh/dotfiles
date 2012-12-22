@@ -6,9 +6,9 @@
 ##################################
 
 # Source directory for dotfiles
-dir="~/dotfiles"
+dir=`pwd`
 # Where to store existing conflicting dotfiles
-olddir="~/dotfiles_old"
+olddir="$HOME/dotfiles_old"
 # List of files/folders to symlink in home directory
 files="bashrc vimrc vim irssi"
 
